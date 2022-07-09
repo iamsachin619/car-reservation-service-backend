@@ -15,14 +15,17 @@ const OwnerSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    contact_number:{
+    contact:{
         type: String,
         required: true
     },
     wallet:{
         type: Number,
         required: true
-
+    },
+    role: {
+        type: String,
+        required: true
     },
     bookings: [{
         type: String,
