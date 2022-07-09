@@ -1,3 +1,4 @@
+var url = require('url');
 const Car = require("../models/car");
 const Owner = require('../models/owner')
 const { createError } = require("../util/createError");
@@ -91,6 +92,38 @@ const getCars = async (req, res, next) => {
     next(err);
   }
 };
+
+//get cars gett
+// const getCarsGET = async (req, res, next) => {
+//   try {
+
+    
+//     // const { filter, sort,dates} = req.body;
+//     // let cars
+    
+//     // if(!dates){
+//     //    cars = await Car.find(filter).sort(sort);  
+//     // } else{
+//     //    cars = await Car.find({ 
+//     //     $or : 
+//     //     [ { 
+//     //       "bookings" : { 
+//     //         $not :
+//     //       { $elemMatch : { "from_time" : { $lte : new Date(dates.to_time) }, "to_time" : { $gte : new Date(dates.from_time) } } } 
+//     //     } },
+//     //      { "bookings" : "[]" } ]
+//     //      , $and : [filter ] }).sort(sort)
+//     // }
+    
+//     // //.sort(sort);
+//     // res.status(200).json(cars);
+    
+//     let query = req.query.filter.replace()
+//     res.status(200).json(req.query.filter)
+//   } catch (err) {
+//     next(err);
+//   }
+// };
 
 module.exports = { addCar, editCarOwner, deleteCar, getCar, getCars };
 

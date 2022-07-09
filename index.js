@@ -21,6 +21,7 @@ app.use('/ownerAuth', ownerAuthRoute);
 app.use('/owner', ownerRoute)
 
 app.post('/getCar', getCar)
+
 const connect =  async () => {
     try {
         await mongoose.connect(process.env.MONGO,{autoIndex:true});

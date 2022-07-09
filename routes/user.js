@@ -13,7 +13,7 @@ route.post('/getCars', getCars)
 
 route.post('/editUser',verifyToken,verifyUser, editUser)
 
-route.post('/deleteUser', verifyToken,verifyUser, deleteUser)
+route.delete('/deleteUser', verifyToken,verifyUser, deleteUser)
 
 route.post('/bookingCreation',verifyToken, verifyUser, CreateBookingsByUser)
 

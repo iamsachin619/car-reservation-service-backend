@@ -5,10 +5,13 @@ const jwt = require('jsonwebtoken');
 const loginUser = async (req, res, next) => {
     try {
         const { email, password } = req.body;
-        const user = await User.findOne({ email });
+        let user = await User.findOne({ email });
         if (!user) return next(createError(404, "User not found"));
+        console.log(user.password)
         if (user.password !== password) return next(createError(401, "Wrong password"));
         const token = jwt.sign({ id: user._id, type:'User' }, process.env.JWT_SECRET);
+        delete user._doc.password
+       
         res.status(200).cookie('access_token', token, { httpOnly: true }).json(user);
     } catch (err) {
         next(err);
