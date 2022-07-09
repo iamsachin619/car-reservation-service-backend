@@ -85,7 +85,7 @@ const getOwners = async (req, res, next) => {
 const getAllOwnedCars = async  (req, res, next) => {
     try {
         const {_id } = req.body;
-        var arr=[]
+        
         const allCars = await Car.find({owner_id:{$eq: _id}})
         res.status(200).json(allCars);
     }catch(err) {
@@ -93,4 +93,16 @@ const getAllOwnedCars = async  (req, res, next) => {
     }
 }
 
-module.exports = {addOwner, editOwner, deleteOwner, getOwner, getOwners,ownerLogin,getAllOwnedCars};
+//delete car from car collection and owner doc
+const delCarOfOwner = async  (req, res, next) => {
+    try {
+        const {_id, car_id } = req.body;
+        await Owner.updateOne({_id: _id},{$pull: {cars:{$eq:car_id}}})
+        await Car.deleteOne({_id:car_id, owner_id:_id}, { new: true });
+        const allCars = await Car.find({owner_id:{$eq: _id}})
+        res.status(200).json(allCars);
+    }catch(err) {
+        next(err);
+    }
+}
+module.exports = {addOwner, editOwner, deleteOwner, getOwner, getOwners,ownerLogin,getAllOwnedCars,delCarOfOwner};
