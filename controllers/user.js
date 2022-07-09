@@ -24,7 +24,7 @@ const loginUser = async (req, res, next) => {
 const addUser = async (req, res, next) => {
     try {
         const user = req.body;
-        const newUser = new User({...user, wallet: 0,bookings: []});
+        const newUser = new User({...user, wallet: 0,bookings: [],personalDetails:{a:'1'}});
         const addedUser = await newUser.save();
         res.status(200).json(addedUser)
     }catch(err) {
@@ -37,6 +37,8 @@ const editUser = async (req, res, next) => {
     try {
         const user = req.body;
         const editedUser = await User.findByIdAndUpdate(user._id, user, {new: true});
+        
+        delete editedUser._doc.password
         res.status(200).json(editedUser);
     }catch(err) {
         next(err);

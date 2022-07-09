@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { trusted } = require('mongoose');
 const { createError } = require('../util/createError');
-
+const Car = require('../models/car')
 
 //auth of owner
 const ownerLogin = async (req, res, next) => {
@@ -81,4 +81,16 @@ const getOwners = async (req, res, next) => {
     }
 }
 
-module.exports = {addOwner, editOwner, deleteOwner, getOwner, getOwners,ownerLogin};
+//get all cars by particular owner
+const getAllOwnedCars = async  (req, res, next) => {
+    try {
+        const {_id } = req.body;
+        var arr=[]
+        const allCars = await Car.find({owner_id:{$eq: _id}})
+        res.status(200).json(allCars);
+    }catch(err) {
+        next(err);
+    }
+}
+
+module.exports = {addOwner, editOwner, deleteOwner, getOwner, getOwners,ownerLogin,getAllOwnedCars};

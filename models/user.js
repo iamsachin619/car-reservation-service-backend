@@ -27,6 +27,9 @@ const userSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
+    personalDetails: {
+        type: Object
+    },
     
     
     bookings: [{
