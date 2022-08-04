@@ -29,9 +29,10 @@ const addOwner = async (req, res, next) => {
         const hash = bcrypt.hashSync(req.body.password, salt);
         
         const owner = req.body;
-        const newOwner = new Owner({...owner, password: hash});
+        const newOwner = new Owner({...owner,role:'Owner', password: hash, wallet:0, bookings: [], cars:[],personalDetails:{a:'1'}});
         const addedOwner = await newOwner.save();
-        res.status(200).send("Owner has been created.");
+        res.status(200).json(addedOwner)
+        //.send("Owner has been created.");
     }catch(err) {
         next(err);
     }

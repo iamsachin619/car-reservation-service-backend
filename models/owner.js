@@ -27,6 +27,9 @@ const OwnerSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    personalDetails:{
+        type:Object
+    },
     bookings: [{
         type: String,
         required: true

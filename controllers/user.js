@@ -24,7 +24,7 @@ const loginUser = async (req, res, next) => {
 const addUser = async (req, res, next) => {
     try {
         const user = req.body;
-        const newUser = new User({...user, wallet: 0,bookings: [],personalDetails:{a:'1'}});
+        const newUser = new User({...user,role:'User', wallet: 0,bookings: [],personalDetails:{a:'1'}});
         const addedUser = await newUser.save();
         res.status(200).json(addedUser)
     }catch(err) {
